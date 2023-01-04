@@ -41,11 +41,16 @@
       var e = new Event('change');
       document.getElementById('verb').dispatchEvent(e);
     }
+    
+    function getMeaning(word) {
+      // ToDo
+    }
 
     function derive(element) {
       var word = element.value.toLowerCase();
+      var meaning = getMeaning(word);
 
-      var derivatives = getDerivatives(word);
+      var derivatives = getDerivatives(word, meaning);
 
       var result = `
       <div class="row">
