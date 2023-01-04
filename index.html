@@ -197,7 +197,6 @@
         <table id="derivationTable" class="table table-bordered table-hover">
           <thead class="thead-dark">
             <tr>
-              <th scope="col">Input Type</th>
               <th scope="col">Derivative Type</th>
               <th scope="col">Formula</th>
               <th scope="col">Derivative</th>
@@ -209,7 +208,6 @@
       for(let d of derivatives){
         result += `
         <tr>
-          <td>${d["form used"]}</td>
           <td>${d["derivative type"]}</td>
           <td>${d.formula}</td>
           <td><b>${d.derivative}</b></td>
