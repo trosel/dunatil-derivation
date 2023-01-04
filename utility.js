@@ -2,77 +2,24 @@ function isVowel(x) {
     return ("aeiouAEIOU".indexOf(x) != -1); 
 }
 
-function getPresentTheme(infinitive) { 
-    return infinitive.split("").slice(0, -1).join("");
-}
-
-function getVerbalRoot(infinitive) {
-    return infinitive.split("").slice(0, -2).join("");
-}
-
-function getPerfectTheme(infinitive, type) {
-    
-    // irregulars
-    switch (infinitive) {
-        case 'ceder':
-        return "cess"
-        // "creder" is a very unique word
-        case 'creder':
-        return "cred"
-        case 'seder':
-        return "sess"
-        case 'mover':
-        return "mot"
-        case 'tener':
-        return "tent"
-        case 'verter':
-        return "vers"
-        case 'venir':
-        return "vent"
-        default:
-        break;
-    }
-
-    var rootLetters = [];
-    if (type == 'er') {
-        rootLetters = infinitive.split("").slice(0, -2);
-        if (rootLetters[rootLetters.length - 1] == "d") {
-            rootLetters[rootLetters.length - 1] = "s";
-        } else if (rootLetters[rootLetters.length - 1] == "r") { 
-            rootLetters[rootLetters.length - 1] = "s";   
-        } else if (isVowel(rootLetters[rootLetters.length - 1])) {
-            rootLetters.push("t");
-        }
-    } else if (type == 'ir' || type == 'ar') {
-        rootLetters = infinitive.split("").slice(0, -1);
-        rootLetters.push("t");
-    }
-    return rootLetters.join("");
-}
-
-function getType(infinitive) {
-    return infinitive.split("").slice(-2).join("");
-}
-
-function getDerivatives(infinitive, perfectTheme, presentTheme, verbalRoot, type) {
+function getDerivatives(infinitive) {
 
     var derivatives = [
         {
         "infinitive": infinitive,
-        "form used": "perfect theme",
-        "formula": "li + perfect theme + e",
+        "formula": "[root]",
         "derivative": "li " + perfectTheme + "e",
-        "derivative type": "noun or adjective",
-        "explanation": "noun or adjective",
-        "example": "li response"
+        "derivative type": "noun",
+        "explanation": "the / a " + infinitive,
+        "example": "dom = the / a house"
         },
         {
         "infinitive": infinitive,
         "form used": "perfect theme",
         "formula": "perfect theme + ion" ,
         "derivative": perfectTheme + "ion",
-        "derivative type": "noun",
-        "explanation": "action, also result and location of it",
+        "derivative type": "adjective",
+        "explanation": "[root]-like / [root]-ish / related to [root]",
         "example": "colaboration"
         },
         {
@@ -211,154 +158,6 @@ function getDerivatives(infinitive, perfectTheme, presentTheme, verbalRoot, type
         "example": "flammear"
         }
     ]
-
-
-    if (type == "ar") {
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "verbal root",
-        "formula": "li verbal root + a",
-        "derivative": "li " + verbalRoot + "a",
-        "derivative type": "noun",
-        "explanation": "noun (indicating activity, location or time)",
-        "example": "li pensa"
-        })
-    }
-    derivatives.push({
-        "infinitive": infinitive,
-        "form used": "verbal root",
-        "formula": "li verbal root + e",
-        "derivative": "li " + verbalRoot + "e",
-        "derivative type": "noun",
-        "explanation": "noun (general ending)",
-        "example": "li pense"
-    })
-
-    if (type == "ir") {
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "present theme",
-        "formula": "present theme + entie",
-        "derivative": presentTheme + "entie",
-        "derivative type": "noun",
-        "explanation": "continuing state",
-        "example": "tolerantie",
-        })
-    } else { 
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "present theme",
-        "formula": "present theme + ntie",
-        "derivative": presentTheme + "ntie",
-        "derivative type": "noun",
-        "explanation": "continuing state",
-        "example": "tolerantie"
-        })
-    }
-
-    if (type == "ir") {
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "present theme",
-        "formula": "present theme + ente/o/a",
-        "derivative": presentTheme + "ente/o/a",
-        "derivative type": "noun",
-        "explanation": "doer of the verb",
-        "example": "consonante",
-        })
-    } else { 
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "present theme",
-        "formula": "present theme + nte/o/a",
-        "derivative": presentTheme + "nte/o/a",
-        "derivative type": "noun",
-        "explanation": "doer of the verb",
-        "example": "consonante"
-        })
-    }
-
-    if (type == "ir") {
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "present theme",
-        "formula": "present theme + end",
-        "derivative": presentTheme + "end",
-        "derivative type": "noun",
-        "explanation": "to do",
-        "example": "multiplicand",
-        })
-    } else { 
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "present theme",
-        "formula": "present theme + nd",
-        "derivative": presentTheme + "nd",
-        "derivative type": "noun",
-        "explanation": "to do",
-        "example": "multiplicand"
-        })
-    }
-
-    if (type == "er" && isVowel(verbalRoot.split("").slice(-1))) {
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "verbal root",
-        "formula": "verbal root + ment",
-        "derivative": verbalRoot + "ment",
-        "derivative type": "noun",
-        "explanation": "concrete action or its result, or serving to / serving as",
-        "example": "guvernament",
-        })
-    } else {
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "present theme",
-        "formula": "present theme + ment",
-        "derivative": presentTheme + "ment",
-        "derivative type": "noun",
-        "explanation": "concrete action or its result, or serving to / serving as",
-        "example": "",
-        })
-    }
-
-    if (type == "ar") {
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "verbal root",
-        "formula": "verbal root + abil",
-        "derivative": verbalRoot + "abil",
-        "derivative type": "adjective",
-        "explanation": "of transitive verbs: what one can do, of intransitive verbs: what can do",
-        "example": "",
-        },{
-        "infinitive": infinitive,
-        "form used": "verbal root",
-        "formula": "verbal root + ada",
-        "derivative": verbalRoot + "ada",
-        "derivative type": "noun",
-        "explanation": "continuing action",
-        "example": "",
-        })
-    } else {
-        derivatives.push({
-        "infinitive": infinitive,
-        "form used": "verbal root",
-        "formula": "verbal root + ibil",
-        "derivative": verbalRoot + "ibil",
-        "derivative type": "adjective",
-        "explanation": "of transitive verbs: what one can do, of intransitive verbs: what can do",
-        "example": "",
-        },{
-        "infinitive": infinitive,
-        "form used": "verbal root",
-        "formula": "verbal root + ida",
-        "derivative": verbalRoot + "ida",
-        "derivative type": "noun",
-        "explanation": "continuing action",
-        "example": "",
-        })
-    }
 
     return derivatives
 }
